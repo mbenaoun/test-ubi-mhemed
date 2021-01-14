@@ -12,3 +12,7 @@
 ###> PHPStorm ###
 /.idea/
 ###< PHPStorm ###
+
+###> Database Docker ###
+/.data/
+###< Database Docker ###
