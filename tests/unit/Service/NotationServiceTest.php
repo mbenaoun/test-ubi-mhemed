@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Service;
+namespace App\Tests\unit\Service;
 
 use App\Repository\NotationRepository;
 use App\Service\NotationService;
@@ -11,7 +11,7 @@ use ReflectionMethod;
 
 /**
  * Class NotationServiceTest
- * @package App\Tests\Unit\Service
+ * @package App\Tests\unit\Service
  */
 class NotationServiceTest extends Unit
 {
