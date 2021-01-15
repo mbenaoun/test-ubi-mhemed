@@ -5,8 +5,7 @@ namespace App\Decorator;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Class SwaggerDecorator
- * @package App\Decorator
+ * Class SwaggerDecorator.
  */
 final class SwaggerDecorator implements NormalizerInterface
 {

@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Class User
- * @package App\Entity
+ * Class User.
+ *
  * @ApiResource(
  *     itemOperations={
  *          "GET",
@@ -36,7 +36,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User
 {
-    #region Attributes
+    //region Attributes
     /**
      * @ApiProperty(identifier=true)
      * @ORM\Id
@@ -69,9 +69,10 @@ class User
      * @Groups("user:read")
      */
     public Collection $notations;
-    #endregion
+    //endregion
 
-    #region Constructor
+    //region Constructor
+
     /**
      * User constructor.
      */
@@ -79,11 +80,14 @@ class User
     {
         $this->notations = new ArrayCollection();
     }
-    #endregion
 
-    #region Methods Notations Collection
+    //endregion
+
+    //region Methods Notations Collection
+
     /**
      * @param Notation $notation
+     *
      * @return $this
      */
     public function addNotation(Notation $notation): self
@@ -98,6 +102,7 @@ class User
 
     /**
      * @param Notation $notation
+     *
      * @return $this
      */
     public function removeNotation(Notation $notation): self
@@ -110,5 +115,6 @@ class User
 
         return $this;
     }
-    #endregion
+
+    //endregion
 }

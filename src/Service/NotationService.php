@@ -7,8 +7,7 @@ use App\Repository\NotationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class NotationService
- * @package App\Service
+ * Class NotationService.
  */
 class NotationService
 {
@@ -20,8 +19,9 @@ class NotationService
 
     /**
      * NotationService constructor.
+     *
      * @param EntityManagerInterface $entityManager
-     * @param CacheService $cacheService
+     * @param CacheService           $cacheService
      */
     public function __construct(EntityManagerInterface $entityManager, CacheService $cacheService)
     {
@@ -31,6 +31,7 @@ class NotationService
 
     /**
      * @param int $userId
+     *
      * @return array
      */
     public function getAvgUser(int $userId)
@@ -50,7 +51,7 @@ class NotationService
                 $result['avg'] = $result['avg'] / count($avgUser);
             }
 
-            $this->cacheService->setValue('avg-users-'. $userId, $result);
+            $this->cacheService->setValue('avg-users-' . $userId, $result);
         }
 
         return $result;

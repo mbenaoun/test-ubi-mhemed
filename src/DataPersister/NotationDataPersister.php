@@ -7,8 +7,7 @@ use App\Entity\Notation;
 use App\Service\CacheService;
 
 /**
- * Class NotationDataPersister
- * @package App\DataPersister
+ * Class NotationDataPersister.
  */
 final class NotationDataPersister implements ContextAwareDataPersisterInterface
 {
@@ -20,8 +19,9 @@ final class NotationDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * NotationDataPersister constructor.
+     *
      * @param ContextAwareDataPersisterInterface $decorated
-     * @param CacheService $cacheService
+     * @param CacheService                       $cacheService
      */
     public function __construct(ContextAwareDataPersisterInterface $decorated, CacheService $cacheService)
     {
@@ -32,6 +32,7 @@ final class NotationDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return bool
      */
     public function supports($data, array $context = []): bool
@@ -42,6 +43,7 @@ final class NotationDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return object|void
      */
     public function persist($data, array $context = [])
@@ -50,8 +52,8 @@ final class NotationDataPersister implements ContextAwareDataPersisterInterface
 
         if (
             $data instanceof Notation && (
-                ($context['collection_operation_name'] ?? null) === 'POST' ||
-                ($context['graphql_operation_name'] ?? null) === 'CREATE'
+                ($context['collection_operation_name'] ?? null) === 'POST'
+                || ($context['graphql_operation_name'] ?? null) === 'CREATE'
             )
         ) {
             $this->cacheService->delete('avg-users-' . $data->user->id);
@@ -63,6 +65,7 @@ final class NotationDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return mixed
      */
     public function remove($data, array $context = [])

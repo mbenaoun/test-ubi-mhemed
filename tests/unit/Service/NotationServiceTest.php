@@ -10,12 +10,15 @@ use Exception;
 use ReflectionMethod;
 
 /**
- * Class NotationServiceTest
- * @package App\Tests\unit\Service
+ * Class NotationServiceTest.
+ *
+ * @internal
+ * @coversNothing
  */
 class NotationServiceTest extends Unit
 {
-    #region Before
+    //region Before
+
     /**
      * @codingStandardsIgnoreStart
      *
@@ -24,26 +27,29 @@ class NotationServiceTest extends Unit
     protected function _before()
     {
     }
-    #endregion
 
-    #region Tests
+    //endregion
+
+    //region Tests
+
     /**
      * @covers       \App\Service\NotationService::getAvgUsers
      * @dataProvider providerGetAvgUsers
      *
      * @param array $data
      * @param array $expected
+     *
      * @throws Exception
      */
     public function testAvgUsers(array $data, array $expected)
     {
         $notationRepository = Stub::make(NotationRepository::class, [
-            'findUsersHaveNotation' => Stub\Expected::once($data)
+            'findUsersHaveNotation' => Stub\Expected::once($data),
         ], $this);
 
         $notationService = Stub::make(NotationService::class, [
             'notationRepository' => $notationRepository,
-            'getAvgUser' => Stub::consecutive(['avg' => 5],['avg' => 4],['avg' => 3],['avg' => 2],['avg' => 1])
+            'getAvgUser' => Stub::consecutive(['avg' => 5], ['avg' => 4], ['avg' => 3], ['avg' => 2], ['avg' => 1]),
         ], $this);
 
         $method = new ReflectionMethod(get_class($notationService), 'getAvgUsers');
@@ -52,9 +58,11 @@ class NotationServiceTest extends Unit
         $actual = $method->invoke($notationService);
         $this->assertEquals($expected, $actual);
     }
-    #endregion
 
-    #region dataProvider
+    //endregion
+
+    //region dataProvider
+
     /**
      * @return iterable
      */
@@ -70,10 +78,11 @@ class NotationServiceTest extends Unit
                 'expected' => ['avg' => 5],
             ],
             'case many users' => [
-                'data' => [['id' => 1],['id' => 2],['id' => 3],['id' => 4],['id' => 5]],
+                'data' => [['id' => 1], ['id' => 2], ['id' => 3], ['id' => 4], ['id' => 5]],
                 'expected' => ['avg' => 3],
-            ]
+            ],
         ];
     }
-    #endregion
+
+    //endregion
 }

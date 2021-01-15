@@ -36,16 +36,31 @@ docker exec -it test-ubi-mhemed_php_1 composer install
 
 7) Go to [http://test-ubi.mhemed](http://test-ubi.mhemed) (To See Routes in API DOC)
 
-We are 6 route : 
+We are 6 route : The format by default is JSON
 
-- POST user
-- PATCH user
-- DELETE user
-- POST notation user
-- GET avg user
-- GET avg users
+- POST user : /users
 
-The format by default is JSON
+BODY : {"lastName":"TEST","firstName":"TEST","dateOfBirth":"1993-11-22"}
+
+- PATCH user : /users/{userId} (userId : int)
+  
+BODY : {"lastName":"TEST","firstName":"TEST","dateOfBirth":"1993-11-22"}
+
+- DELETE user : /users/{userId} (userId : int)
+  
+NO BODY
+
+- POST notation user : /notations
+
+BODY : {"subject":"TEST","score":5.5,"user":"users/USER_ID"}
+
+- GET avg user : /users/{userId}/avg (userId : int)
+
+NO BODY
+
+- GET avg users : /notations/avg
+
+NO BODY
 
 ## Utils
 
@@ -94,4 +109,23 @@ KEYS *
 ```
 GET avg-users-17
 ```
+
+### PhpCsFixer
+
+- Connection API Container or Terminal local in your project (PHP 7.4 required)
+
+```
+docker exec -it test-ubi-mhemed_php_1 bash
+```
+- Launch PhpCsFixer to fix code (rules define in .php_cs.dist)
+```
+php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --no-interaction
+```
+
+- Keyboard shortcut to launch PhpCsFixer since your IDE
+
+1) Create external tools in your IDE (preferences / tools / external tools)
+2) Create Keyboard shortcut in your IDE (preferences / keymap)
+
+
 

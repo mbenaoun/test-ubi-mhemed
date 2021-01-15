@@ -5,8 +5,7 @@ namespace App\Service;
 use Predis\Client;
 
 /**
- * Class CacheService
- * @package App\Service
+ * Class CacheService.
  */
 class CacheService
 {
@@ -18,19 +17,20 @@ class CacheService
 
     /**
      * CacheService constructor.
+     *
      * @param Client $redisClient
-     * @param int $disableCache
+     * @param int    $disableCache
      */
     public function __construct(Client $redisClient, int $disableCache)
     {
         $this->cache = $redisClient;
-        $this->disableCache = (bool)$disableCache;
-
+        $this->disableCache = (bool) $disableCache;
     }
 
     /**
      * @param string $keyName
-     * @return mixed|null
+     *
+     * @return null|mixed
      */
     public function getValue(string $keyName)
     {
@@ -49,6 +49,7 @@ class CacheService
     /**
      * @param string $keyName
      * @param $value
+     *
      * @return bool
      */
     public function setValue(string $keyName, $value): bool
@@ -67,6 +68,7 @@ class CacheService
 
     /**
      * @param string $keyName
+     *
      * @return bool
      */
     public function delete(string $keyName): bool

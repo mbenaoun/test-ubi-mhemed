@@ -7,8 +7,7 @@ use App\Entity\User;
 use App\Service\CacheService;
 
 /**
- * Class UserDataPersister
- * @package App\DataPersister
+ * Class UserDataPersister.
  */
 final class UserDataPersister implements ContextAwareDataPersisterInterface
 {
@@ -20,8 +19,9 @@ final class UserDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * UserDataPersister constructor.
+     *
      * @param ContextAwareDataPersisterInterface $decorated
-     * @param CacheService $cacheService
+     * @param CacheService                       $cacheService
      */
     public function __construct(ContextAwareDataPersisterInterface $decorated, CacheService $cacheService)
     {
@@ -32,6 +32,7 @@ final class UserDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return bool
      */
     public function supports($data, array $context = []): bool
@@ -42,6 +43,7 @@ final class UserDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return object|void
      */
     public function persist($data, array $context = [])
@@ -52,6 +54,7 @@ final class UserDataPersister implements ContextAwareDataPersisterInterface
     /**
      * @param $data
      * @param array $context
+     *
      * @return mixed
      */
     public function remove($data, array $context = [])

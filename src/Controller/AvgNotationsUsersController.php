@@ -8,8 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AvgNotationsUsersController
- * @package App\Controller
+ * Class AvgNotationsUsersController.
  */
 class AvgNotationsUsersController extends AbstractController
 {
@@ -18,6 +17,7 @@ class AvgNotationsUsersController extends AbstractController
 
     /**
      * AvgNotationsUsersController constructor.
+     *
      * @param NotationService $notationService
      */
     public function __construct(NotationService $notationService)
@@ -31,6 +31,7 @@ class AvgNotationsUsersController extends AbstractController
      *     path="/notations/avg",
      *     methods={"GET"}
      * )
+     *
      * @return JsonResponse
      */
     public function __invoke(): JsonResponse

@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Notation
- * @package App\Entity
+ * Class Notation.
+ *
  * @ApiResource(
  *     itemOperations={"GET"},
  *     collectionOperations={
@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Notation
 {
-    #region Attributes
+    //region Attributes
     /**
      * @ApiProperty(identifier=true)
      * @ORM\Id
@@ -54,5 +54,5 @@ class Notation
      * @ORM\JoinColumn(nullable=false)
      */
     public ?User $user;
-    #endregion
+    //endregion
 }
