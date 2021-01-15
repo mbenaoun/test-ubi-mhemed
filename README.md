@@ -49,6 +49,28 @@ The format by default is JSON
 
 ## Utils
 
+### Testing
+
+- Connection PHP Container
+
+```
+docker exec -it test-ubi-mhemed_php_1 bash
+```
+
+- Launch Unit Test
+```
+php vendor/bin/codecept run unit
+```
+
+We can see in console output the result unit functions (failed and or success functions)
+
+- Show Code Coverage Report (Unit Test example)
+```
+php vendor/bin/codecept run unit --coverage-html
+```
+
+After we open the file index.html in chrome => test-ubi-mhemed/tests/_output/coverage/index.html.
+
 ### Cache (Redis)
 
 - Connection Redis Container
