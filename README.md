@@ -4,6 +4,10 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+I decided to develop with the ApiPlatform Bundle. I could have developed without API Platform too :).
+
+Good code review ;) !
+
 ### Prerequisites
 
 * [Git](https://git-scm.com)
