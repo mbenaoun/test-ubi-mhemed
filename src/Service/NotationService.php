@@ -15,32 +15,42 @@ class NotationService
     /** @var NotationRepository */
     private NotationRepository $notationRepository;
 
+    /** @var CacheService */
+    private CacheService $cacheService;
+
     /**
      * NotationService constructor.
      * @param EntityManagerInterface $entityManager
+     * @param CacheService $cacheService
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, CacheService $cacheService)
     {
         $this->notationRepository = $entityManager->getRepository(Notation::class);
+        $this->cacheService = $cacheService;
     }
 
     /**
      * @param int $userId
      * @return array
      */
-    public function getAvgUser(int $userId): array
+    public function getAvgUser(int $userId)
     {
-        $avgUser = $this->notationRepository->findAvgUser($userId);
+        $result = $this->cacheService->getValue('avg-users-' . $userId);
 
-        $result = [];
+        if (null === $result) {
+            $avgUser = $this->notationRepository->findAvgUser($userId);
+            $result = [];
 
-        if (!empty($avgUser)) {
-            $result['avg'] = 0;
-            foreach ($avgUser as $anAvg) {
-                $result['avg'] += $anAvg['avg'];
+            if (!empty($avgUser)) {
+                $result['avg'] = 0;
+                foreach ($avgUser as $anAvg) {
+                    $result['avg'] += $anAvg['avg'];
+                }
+
+                $result['avg'] = $result['avg'] / count($avgUser);
             }
 
-            $result['avg'] = $result['avg'] / count($avgUser);
+            $this->cacheService->setValue('avg-users-'. $userId, $result);
         }
 
         return $result;

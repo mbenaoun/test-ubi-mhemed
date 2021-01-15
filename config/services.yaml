@@ -5,12 +5,16 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     redis.url: '%env(resolve:REDIS_URL)%'
+    disable.cache: '%env(resolve:DISABLE_CACHE)%'
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $disableCache: '%disable.cache%'
+            $redisClient: '@redis.adapter.client'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -28,14 +32,19 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
 
     'App\Decorator\SwaggerDecorator':
         decorates: 'api_platform.swagger.normalizer.documentation'
         arguments: [ '@App\Decorator\SwaggerDecorator.inner' ]
         autoconfigure: false
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\DataPersister\UserDataPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
+
+    App\DataPersister\NotationDataPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
 
     # redis adapter
     redis.adapter:

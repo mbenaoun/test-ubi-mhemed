@@ -44,7 +44,7 @@ class User
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @Groups("user:read")
      */
-    public int $id;
+    public ?int $id;
 
     /**
      * @ORM\Column(type="string", length=150)

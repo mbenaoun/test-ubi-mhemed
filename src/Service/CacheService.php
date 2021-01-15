@@ -34,13 +34,16 @@ class CacheService
      */
     public function getValue(string $keyName)
     {
-        $data = $this->cache->get($keyName);
-
-        if (null !== $data) {
-            unserialize($data);
+        if ($this->disableCache) {
+            return null;
         }
 
-        return $this->disableCache ? null : unserialize($data);
+        $data = $this->cache->get($keyName);
+        if (null !== $data) {
+            return unserialize($data);
+        }
+
+        return null;
     }
 
     /**
@@ -54,6 +57,25 @@ class CacheService
             return false;
         }
         $this->cache->set($keyName, serialize($value));
+
+        if (null !== $this->cache->get($keyName)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $keyName
+     * @return bool
+     */
+    public function delete(string $keyName): bool
+    {
+        if ($this->disableCache) {
+            return false;
+        }
+
+        $this->cache->del($keyName);
 
         if (null === $this->cache->get($keyName)) {
             return true;

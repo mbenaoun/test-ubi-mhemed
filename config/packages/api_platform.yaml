@@ -12,6 +12,6 @@ api_platform:
         html:
             mime_types: [ 'text/html' ]
     patch_formats:
-        json: ['application/merge-patch+json']
+        json: ['application/json']
     swagger:
         versions: [3]

@@ -36,7 +36,7 @@ class Notation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", options={"unsigned":true})
      */
-    public int $id;
+    public ?int $id;
 
     /**
      * @ORM\Column(type="string", length=150)

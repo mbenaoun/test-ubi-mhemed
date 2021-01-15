@@ -16,3 +16,8 @@
 ###> Database Docker ###
 /.data/
 ###< Database Docker ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
