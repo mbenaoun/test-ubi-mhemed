@@ -13,7 +13,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package App\Entity
  * @ApiResource(
  *     itemOperations={"GET"},
- *     collectionOperations={"POST"}
+ *     collectionOperations={
+ *          "POST",
+ *          "notations_users"={
+ *              "method"="GET",
+ *              "path"="/notations/avg",
+ *              "swagger_context"={
+ *                  "summary"="Avg Users",
+ *                  "parameters"={},
+ *              }
+ *          }
+ *     }
  * )
  * @ORM\Entity(repositoryClass=NotationRepository::class)
  */

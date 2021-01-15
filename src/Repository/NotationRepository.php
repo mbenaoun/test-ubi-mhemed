@@ -19,32 +19,31 @@ class NotationRepository extends ServiceEntityRepository
         parent::__construct($registry, Notation::class);
     }
 
-    // /**
-    //  * @return Notation[] Returns an array of Notation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $userId
+     * @return array
+     */
+    public function findAvgUser(int $userId): array
     {
         return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
-            ->setMaxResults(10)
+            ->select("n.subject, avg(n.score) as avg")
+            ->where('n.user = :userId')
+            ->setParameter('userId', $userId)
+            ->groupBy('n.subject')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getArrayResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Notation
+    /**
+     * @return array
+     */
+    public function findUsersHaveNotation(): array
     {
         return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
+            ->distinct()
+            ->select('u.id')
+            ->join('n.user', 'u')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getArrayResult();
     }
-    */
 }

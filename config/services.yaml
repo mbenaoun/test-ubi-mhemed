@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    redis.url: '%env(resolve:REDIS_URL)%'
 
 services:
     # default configuration for services in *this* file
@@ -27,5 +28,35 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
+
+    'App\Decorator\SwaggerDecorator':
+        decorates: 'api_platform.swagger.normalizer.documentation'
+        arguments: [ '@App\Decorator\SwaggerDecorator.inner' ]
+        autoconfigure: false
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # redis adapter
+    redis.adapter:
+        public: false
+        class: Symfony\Component\Cache\Adapter\RedisAdapter
+        arguments:
+            $redisClient: '@redis.adapter.client'
+
+    redis.adapter.client:
+        public: false
+        class: Predis\Client
+        factory: ['Symfony\Component\Cache\Adapter\RedisAdapter', 'createConnection']
+        arguments:
+            $dsn: '%redis.url%'
+            $options:
+                $compression: true
+                $redis_cluster: true
+                $lazy: false
+                $persistent: 1
+                $persistent_id: null
+                $tcp_keepalive: 0
+                $timeout: 30
+                $read_timeout: 0
+                $retry_interval: 0

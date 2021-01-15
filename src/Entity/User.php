@@ -15,7 +15,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Class User
  * @package App\Entity
  * @ApiResource(
- *     itemOperations={"GET", "DELETE", "PATCH"},
+ *     itemOperations={
+ *          "GET",
+ *          "DELETE",
+ *          "PATCH",
+ *          "avg_users"={
+ *              "method"="GET",
+ *              "path"="/users/{userId}/avg",
+ *              "swagger_context"={
+ *                  "summary"="Avg User",
+ *                  "parameters"={},
+ *              }
+ *          }
+ *     },
  *     collectionOperations={"POST"},
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}}
